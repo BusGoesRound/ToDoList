@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="ToDoList.UserControls.Task"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:ToDoList.UserControls"
+    mc:Ignorable="d" 
+    d:DesignHeight="25" d:DesignWidth="400">
+    <Grid
+        Margin="0,0,0,5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Button
+			Grid.Column="0"
+			Click="CheckBoxClicked">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse
+							Stroke="{StaticResource ForegroundColor}"
+							StrokeThickness="3"
+							Fill="Transparent"
+							Width="20" Height="20"/>
+                        <Ellipse
+							Grid.Column="0"
+							Fill="{Binding Path=DotColor}"
+							Width="10" Height="10"/>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <TextBox
+			Grid.Column="1"
+			Text="Hello"
+			FontSize="14"
+					
+			Foreground="{StaticResource TextColor}"
+			Background="{StaticResource ForegroundColor}"
+			CaretBrush="Black"
+			SelectionBrush="#999999"
+			BorderThickness="0">
+		</TextBox>
+		
+	</Grid>
+</UserControl>
