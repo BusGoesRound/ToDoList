@@ -9,8 +9,11 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <Grid Background="Black">
-                            <Image x:Name="Sprite" Source="/Sprites/Cross.png"/>
+                        <Grid Background="#595959">
+                            <Image
+                                x:Name="Sprite"
+                                Source="/Sprites/Cross.png"
+                                Width="20" Height="20"/>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
