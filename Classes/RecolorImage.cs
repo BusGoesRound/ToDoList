@@ -12,6 +12,14 @@ namespace ToDoList.Classes
 {
     class RecolorImage
     {
+        public struct PixelColor
+        {
+            public byte Blue;
+            public byte Green;
+            public byte Red;
+            public byte Alpha;
+        }
+
         public static Image Recolor(Image image)
         {
             BitmapSource? bitmapSource = image.Source as BitmapSource;
@@ -19,6 +27,12 @@ namespace ToDoList.Classes
 
             int width = bitmapImage.PixelWidth;
             int height = bitmapImage.PixelHeight;
+
+            PixelColor[] result = new PixelColor[width * height];
+
+            int[] arr = new int[width * height];
+
+            bitmapImage.CopyPixels(arr, width * 4, 0);
 
             WriteableBitmap bitmap = new(width, height, 96, 96, PixelFormats.Bgra32, null);
 
@@ -31,9 +45,9 @@ namespace ToDoList.Classes
                 {
                     int i = width * y + x;
 
-                    red = 0;
-                    green = 0;
-                    blue = 0;
+                    red = 255;
+                    green = 255;
+                    blue = 255;
                     alpha = 255;
 
                     pixels[i] = (uint)((blue << 24) + (green << 16) + (red << 8) + alpha);

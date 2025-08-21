@@ -10,12 +10,16 @@
 
   <ItemGroup>
     <None Remove="Sprites\Cross.png" />
+    <None Remove="Tasks.json" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Sprites\Cross.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Content Include="Tasks.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

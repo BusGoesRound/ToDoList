@@ -11,6 +11,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30"/>
             <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
 
         <Button
@@ -34,16 +35,32 @@
         </Button>
 
         <TextBox
+            x:Name="TaskTextBox"
+            
 			Grid.Column="1"
-			Text="Hello"
+			Text="{Binding Path=TaskText}"
 			FontSize="14"
 					
 			Foreground="{StaticResource TextColor}"
-			Background="{StaticResource ForegroundColor}"
+			Background="Transparent"
 			CaretBrush="Black"
 			SelectionBrush="#999999"
 			BorderThickness="0">
 		</TextBox>
-		
-	</Grid>
+
+        <Button
+			Grid.Column="2"
+			Click="DeleteClicked">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Rectangle
+                            Fill="{StaticResource ForegroundColor}"
+                            Width="20" Height="20"/>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+    </Grid>
 </UserControl>

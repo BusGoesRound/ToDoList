@@ -17,6 +17,9 @@
     <StackPanel>
 
         <StackPanel
+            x:Name="Buttons"
+            
+            d:Background="Black"
 			Grid.Row="0"
 			Orientation="Horizontal"
 			HorizontalAlignment="Right"
@@ -32,6 +35,9 @@
         </StackPanel>
 
         <StackPanel
+            x:Name="Tasks"
+            
+            d:Background="Black"
 			Grid.Row="1"
 			HorizontalAlignment="Left">
 
@@ -50,8 +56,6 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-
-            <UserControls:Task/>
 
         </StackPanel>
 	</StackPanel>
