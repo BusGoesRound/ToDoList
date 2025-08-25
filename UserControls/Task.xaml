@@ -4,19 +4,18 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:ToDoList.UserControls"
-    mc:Ignorable="d" 
-    d:DesignHeight="25" d:DesignWidth="400">
+    mc:Ignorable="d">
     <Grid
         Margin="0,0,0,5">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="25"/>
             <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="30"/>
-            <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
 
         <Button
-			Grid.Column="0"
+			Grid.Column="2"
 			Click="CheckBoxClicked">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
@@ -38,7 +37,7 @@
         <TextBox
             x:Name="TaskTextBox"
             
-			Grid.Column="1"
+			Grid.Column="3"
 			Text="{Binding Path=TaskText}"
             d:Text="Task"
 			FontSize="14"
@@ -51,7 +50,7 @@
 		</TextBox>
 
         <Button
-			Grid.Column="2"
+			Grid.Column="0"
 			Click="DeleteClicked">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
@@ -65,7 +64,7 @@
         </Button>
 
         <Button
-			Grid.Column="3"
+			Grid.Column="1"
 			Click="RepeatCheckbox">
             <Button.Template>
                 <ControlTemplate TargetType="Button">

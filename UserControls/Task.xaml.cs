@@ -14,6 +14,8 @@ namespace ToDoList.UserControls
         public bool IsChecked = false;
         public bool RepeatDaily = false;
 
+        // Constructors ______________________________________________________________________________________________________________
+
         public Task()
 		{
             InitializeComponent();
@@ -30,6 +32,7 @@ namespace ToDoList.UserControls
             string[] taskString = task.Split('|');
 
             IsChecked = bool.Parse(taskString[1]);
+            if(taskString.Length == 3){ RepeatDaily = bool.Parse(taskString[2]); UpdateRepeatDaily(); }
             UpdateCheckBox();
             TaskText = taskString[0];
         }
@@ -44,19 +47,14 @@ namespace ToDoList.UserControls
             TaskText = taskText;
         }
 
+        // ToString ______________________________________________________________________________________________________________
+
         override public string ToString()
         {
-            return TaskText + "|" + IsChecked;
+            return TaskText + "|" + IsChecked + "|" + RepeatDaily;
         }
 
-        public void ResetTask()
-        {
-            if (RepeatDaily)
-            {
-                IsChecked = false;
-                UpdateCheckBox();
-            }
-        }
+        //Checkbox ______________________________________________________________________________________________________________
 
         private void CheckBoxClicked(object sender, RoutedEventArgs e)
 		{
@@ -69,6 +67,41 @@ namespace ToDoList.UserControls
             if (IsChecked) DotColor = BackgroundColor;
             else DotColor = Brushes.Transparent;
         }
+
+        //Repeat ______________________________________________________________________________________________________________
+
+        private void RepeatCheckbox(object sender, RoutedEventArgs e)
+        {
+            RepeatDaily = !RepeatDaily;
+            UpdateRepeatDaily();
+        }
+
+        private void UpdateRepeatDaily()
+        {
+            if (RepeatDaily) DotColor2 = BackgroundColor;
+            else DotColor2 = Brushes.Transparent;
+        }
+
+        public void ResetTask()
+        {
+            if (RepeatDaily)
+            {
+                IsChecked = false;
+                UpdateCheckBox();
+            }
+        }
+
+        //Delete ______________________________________________________________________________________________________________
+
+        private void DeleteClicked(object sender, RoutedEventArgs e)
+        {
+            if (Parent is StackPanel parentStackPanel)
+            {
+                parentStackPanel.Children.Remove(this);
+            }
+        }
+
+        // Dependency Properties ______________________________________________________________________________________________________________
 
         private static readonly DependencyProperty DotColorProperty = DependencyProperty.Register("DotColor", typeof(Brush), typeof(Task));
         private static readonly DependencyProperty DotColor2Property = DependencyProperty.Register("DotColor2", typeof(Brush), typeof(Task));
@@ -90,26 +123,6 @@ namespace ToDoList.UserControls
         {
             get { return (string)GetValue(TaskTextProperty); }
             set { SetValue(TaskTextProperty, value); }
-        }
-
-        private void DeleteClicked(object sender, RoutedEventArgs e)
-        {
-            if (Parent is StackPanel parentStackPanel)
-            {
-                parentStackPanel.Children.Remove(this);
-            }
-        }
-
-        private void RepeatCheckbox(object sender, RoutedEventArgs e)
-        {
-            RepeatDaily = !RepeatDaily;
-            UpdateRepeatDaily();
-        }
-
-        private void UpdateRepeatDaily()
-        {
-            if (RepeatDaily) DotColor2 = BackgroundColor;
-            else DotColor2 = Brushes.Transparent;
         }
     }
 }

@@ -7,25 +7,9 @@
              mc:Ignorable="d">
     <StackPanel
         Orientation="Horizontal">
-        
-        <Button
-            Margin="5"
-            HorizontalAlignment="Left"
-		    Background="{StaticResource ForegroundColor}"
-		    Click="AddTask">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                        <TextBlock
-                        Text="+ Add Task"
-                        FontSize="14"
-                        HorizontalAlignment="Center"
-                        Foreground="{StaticResource TextColor}"/>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
 
         <Button
-			Margin="5"
+			Margin="2.5, 5"
 			Click="DeleteClicked">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
@@ -34,6 +18,22 @@
                             Fill="{StaticResource ForegroundColor}"
                             Width="20" Height="20"/>
                     </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Button
+            Margin="2.5, 5"
+            HorizontalAlignment="Left"
+		    Background="{StaticResource ForegroundColor}"
+		    Click="AddTask">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <TextBlock
+                        Text="+ Add Task"
+                        FontSize="14"
+                        HorizontalAlignment="Center"
+                        Foreground="{StaticResource TextColor}"/>
                 </ControlTemplate>
             </Button.Template>
         </Button>
