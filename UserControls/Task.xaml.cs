@@ -16,25 +16,46 @@ namespace ToDoList.UserControls
 
         public Task()
 		{
-            TaskText = "Task";
-
             InitializeComponent();
             DataContext = this;
+
+            TaskText = "Task";
         }
 
-        public Task(string taskText, bool isChecked = false)
+        public Task(string task)
         {
+            InitializeComponent();
+            DataContext = this;
+
+            string[] taskString = task.Split('|');
+
+            IsChecked = bool.Parse(taskString[1]);
+            UpdateCheckBox();
+            TaskText = taskString[0];
+        }
+
+        public Task(string taskText, bool isChecked)
+        {
+            InitializeComponent();
+            DataContext = this;
+
             IsChecked = isChecked;
             UpdateCheckBox();
             TaskText = taskText;
-
-            InitializeComponent();
-            DataContext = this;
         }
 
         override public string ToString()
         {
             return TaskText + "|" + IsChecked;
+        }
+
+        public void ResetTask()
+        {
+            if (RepeatDaily)
+            {
+                IsChecked = false;
+                UpdateCheckBox();
+            }
         }
 
         private void CheckBoxClicked(object sender, RoutedEventArgs e)
@@ -49,9 +70,9 @@ namespace ToDoList.UserControls
             else DotColor = Brushes.Transparent;
         }
 
-        public static DependencyProperty DotColorProperty = DependencyProperty.Register("DotColor", typeof(Brush), typeof(Task));
-        public static DependencyProperty DotColor2Property = DependencyProperty.Register("DotColor2", typeof(Brush), typeof(Task));
-        public static DependencyProperty TaskTextProperty = DependencyProperty.Register("TaskText", typeof(string), typeof(Task));
+        private static readonly DependencyProperty DotColorProperty = DependencyProperty.Register("DotColor", typeof(Brush), typeof(Task));
+        private static readonly DependencyProperty DotColor2Property = DependencyProperty.Register("DotColor2", typeof(Brush), typeof(Task));
+        private static readonly DependencyProperty TaskTextProperty = DependencyProperty.Register("TaskText", typeof(string), typeof(Task));
 
         public Brush DotColor
 		{

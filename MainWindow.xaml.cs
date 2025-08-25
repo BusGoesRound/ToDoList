@@ -1,16 +1,9 @@
 ﻿using System.Diagnostics;
 using System.IO;
-using System.Text;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using ToDoList.Classes;
 using ToDoList.UserControls;
@@ -18,9 +11,6 @@ using Task = ToDoList.UserControls.Task;
 
 namespace ToDoList
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private DateTime _lastResetDate = DateTime.Today;
@@ -49,20 +39,16 @@ namespace ToDoList
 
         private void ResetTasks()
         {
-            foreach (var child in Tasks.Children)
+            foreach (var child in TaskListPanel.Children)
             {
-                if (child is UserControls.Task task)
+                if(child is TaskList taskList)
                 {
-                    if (task.RepeatDaily)
-                    {
-                        task.IsChecked = false;
-                        task.UpdateCheckBox();
-                    }
+                    taskList.ResetTasks();
                 }
             }
         }
 
-        private void CloseWindow(object sender, RoutedEventArgs e)
+private void CloseWindow(object sender, RoutedEventArgs e)
         {
             Save();
             Close();
@@ -73,32 +59,17 @@ namespace ToDoList
             WindowState = WindowState.Minimized;
         }
 
-        private void AddTask(object sender, RoutedEventArgs e)
-        {
-            DependencyObject parent = (DependencyObject)sender;
-            while (parent != null && parent is not StackPanel)
-            {
-                parent = VisualTreeHelper.GetParent(parent);
-            }
-
-            if (parent is StackPanel stackPanel)
-            {
-                UserControls.Task newTask = new();
-                stackPanel.Children.Add(newTask);
-            }
-        }
-
-        JsonSerializerOptions jsonOptions = new() { WriteIndented = true }; 
+        private readonly JsonSerializerOptions jsonOptions = new() { WriteIndented = true };
 
         private void Save()
         {
-            List<string> tasks = [];
+            List<List<string>> tasks = [];
 
-            foreach (var child in Tasks.Children)
+            foreach (var child in TaskListPanel.Children)
             {
-                if (child is UserControls.Task task)
+                if (child is TaskList taskList)
                 {
-                    tasks.Add(task.ToString());
+                    tasks.Add(taskList.ToList());
                 }
             }
 
@@ -108,13 +79,12 @@ namespace ToDoList
 
         private void Load()
         {
-            var tasks = JsonSerializer.Deserialize<List<string>>(File.ReadAllText("tasks.json"), jsonOptions) ?? [];
+            var tasks = JsonSerializer.Deserialize<List<List<string>>>(File.ReadAllText("tasks.json"), jsonOptions) ?? [];
 
-            foreach (string task in tasks)
+            foreach (List<string> taskList in tasks)
             {
-                string[] taskString = task.Split('|');
-                Task newTask = new(taskString[0], bool.Parse(taskString[1]));
-                Tasks.Children.Add(newTask);
+                TaskList newList = new(taskList);
+                TaskListPanel.Children.Insert(TaskListPanel.Children.Count - 1, newList);
             }
         }
     }
