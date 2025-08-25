@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using ToDoList.Classes;
 using ToDoList.UserControls;
 using Task = ToDoList.UserControls.Task;
@@ -22,10 +23,43 @@ namespace ToDoList
     /// </summary>
     public partial class MainWindow : Window
     {
+        private DateTime _lastResetDate = DateTime.Today;
+
         public MainWindow()
         {
             InitializeComponent();
             Load();
+
+            DispatcherTimer timer = new()
+            {
+                Interval = TimeSpan.FromMinutes(1)
+            };
+            timer.Tick += Timer_Tick;
+            timer.Start();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if (DateTime.Today > _lastResetDate)
+            {
+                _lastResetDate = DateTime.Today;
+                ResetTasks();
+            }
+        }
+
+        private void ResetTasks()
+        {
+            foreach (var child in Tasks.Children)
+            {
+                if (child is UserControls.Task task)
+                {
+                    if (task.RepeatDaily)
+                    {
+                        task.IsChecked = false;
+                        task.UpdateCheckBox();
+                    }
+                }
+            }
         }
 
         private void CloseWindow(object sender, RoutedEventArgs e)

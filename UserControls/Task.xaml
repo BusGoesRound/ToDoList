@@ -12,6 +12,7 @@
             <ColumnDefinition Width="30"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
 
         <Button
@@ -39,6 +40,7 @@
             
 			Grid.Column="1"
 			Text="{Binding Path=TaskText}"
+            d:Text="Task"
 			FontSize="14"
 					
 			Foreground="{StaticResource TextColor}"
@@ -57,6 +59,26 @@
                         <Rectangle
                             Fill="{StaticResource ForegroundColor}"
                             Width="20" Height="20"/>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Button
+			Grid.Column="3"
+			Click="RepeatCheckbox">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse
+							Stroke="{StaticResource ForegroundColor}"
+							StrokeThickness="3"
+							Fill="Transparent"
+							Width="20" Height="20"/>
+                        <Ellipse
+							Grid.Column="0"
+							Fill="{Binding Path=DotColor2}"
+							Width="10" Height="10"/>
                     </Grid>
                 </ControlTemplate>
             </Button.Template>
