@@ -38,7 +38,6 @@
                 Grid.Column="0"
                 
                 DragDelta="ScreenResize"
-                DragStarted="ResizeThumb_DragStarted"
                 Cursor="SizeNWSE"
                 
                 Height="20" Width="20"

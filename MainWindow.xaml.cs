@@ -15,6 +15,14 @@ namespace ToDoList
     {
         private DateTime _lastResetDate = DateTime.Today;
 
+        const double DEFAULT_WIDTH = 400;
+        const double DEFAULT_HEIGHT = 400;
+        const double DEFAULT_X = 633;
+        const double DEFAULT_Y = 1520;
+
+        const double CORNER_X = 1033;
+        const double CORNER_Y = 1920;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -71,6 +79,8 @@ namespace ToDoList
         {
             List<List<string>> tasks = [];
 
+            tasks.Add(["Window Size|" + Width + "|" + Height]);
+
             foreach (var child in TaskListPanel.Children)
             {
                 if (child is TaskList taskList)
@@ -87,6 +97,16 @@ namespace ToDoList
         {
             var tasks = JsonSerializer.Deserialize<List<List<string>>>(File.ReadAllText("tasks.json"), jsonOptions) ?? [];
 
+            string[] windowSize = tasks[0][0].Split('|');
+            if (windowSize[0] == "Window Size")
+            {
+                Width = double.Parse(windowSize[1]);
+                Height = double.Parse(windowSize[2]);
+                Top = CORNER_X - Height;
+                Left = CORNER_Y - Width;
+                tasks.RemoveAt(0);
+            }
+
             foreach (List<string> taskList in tasks)
             {
                 TaskList newList = new(taskList);
@@ -94,25 +114,12 @@ namespace ToDoList
             }
         }
 
-        private double originalWidth;
-        private double originalHeight;
-        private double originalLeft;
-        private double originalTop;
-
-        private void ResizeThumb_DragStarted(object sender, DragStartedEventArgs e)
-        {
-            originalWidth = Width;
-            originalHeight = Height;
-            originalLeft = Left;
-            originalTop = Top;
-        }
-
         private void ScreenResize(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
         {
-            double newWidth = originalWidth - e.HorizontalChange;
-            double newHeight = originalHeight - e.VerticalChange;
-            double newLeft = originalLeft + e.HorizontalChange;
-            double newTop = originalTop + e.VerticalChange;
+            double newWidth = Width - e.HorizontalChange;
+            double newHeight = Height - e.VerticalChange;
+            double newLeft = Left + e.HorizontalChange;
+            double newTop = Top + e.VerticalChange;
 
             if (newWidth > MinWidth)
             {
