@@ -3,9 +3,9 @@ using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Threading;
-using ToDoList.Classes;
 using ToDoList.UserControls;
 using Task = ToDoList.UserControls.Task;
 
@@ -28,7 +28,9 @@ namespace ToDoList
             timer.Start();
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
+        // Daily Reset ______________________________________________________________________________________________________________
+
+        private void Timer_Tick(object? sender, EventArgs e)
         {
             if (DateTime.Today > _lastResetDate)
             {
@@ -48,7 +50,9 @@ namespace ToDoList
             }
         }
 
-private void CloseWindow(object sender, RoutedEventArgs e)
+        // Window Controls ______________________________________________________________________________________________________________
+
+        private void CloseWindow(object sender, RoutedEventArgs e)  
         {
             Save();
             Close();
@@ -58,6 +62,8 @@ private void CloseWindow(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
         }
+
+        // Save and Load ______________________________________________________________________________________________________________
 
         private readonly JsonSerializerOptions jsonOptions = new() { WriteIndented = true };
 
@@ -85,6 +91,39 @@ private void CloseWindow(object sender, RoutedEventArgs e)
             {
                 TaskList newList = new(taskList);
                 TaskListPanel.Children.Insert(TaskListPanel.Children.Count - 1, newList);
+            }
+        }
+
+        private double originalWidth;
+        private double originalHeight;
+        private double originalLeft;
+        private double originalTop;
+
+        private void ResizeThumb_DragStarted(object sender, DragStartedEventArgs e)
+        {
+            originalWidth = Width;
+            originalHeight = Height;
+            originalLeft = Left;
+            originalTop = Top;
+        }
+
+        private void ScreenResize(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
+        {
+            double newWidth = originalWidth - e.HorizontalChange;
+            double newHeight = originalHeight - e.VerticalChange;
+            double newLeft = originalLeft + e.HorizontalChange;
+            double newTop = originalTop + e.VerticalChange;
+
+            if (newWidth > MinWidth)
+            {
+                Width = newWidth;
+                Left = newLeft;
+            }
+
+            if (newHeight > MinHeight)
+            {
+                Height = newHeight;
+                Top = newTop;
             }
         }
     }

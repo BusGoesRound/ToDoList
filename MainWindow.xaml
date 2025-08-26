@@ -13,24 +13,38 @@
 		WindowStyle="None"
 		Topmost="True"
 		Top="633" Left="1520"
-		Height="400" Width="400">
+        Height="400" Width="400"
+        MinWidth="200" MinHeight="200">
+
     <StackPanel>
 
-        <StackPanel
-            x:Name="Buttons"
-            
-			Orientation="Horizontal"
-			HorizontalAlignment="Right"
-			VerticalAlignment="Top">
+        <Grid>
 
-            <Button
-                Style="{StaticResource MenuButtonStyle}"
-                Click="MinimizeWindow"/>
-            <Button
-                Style="{StaticResource MenuButtonStyle}"
-                Click="CloseWindow"/>
+            <Thumb
+                DragDelta="ScreenResize"
+                DragStarted="ResizeThumb_DragStarted"
+                Cursor="SizeNWSE"
+                
+                Height="20" Width="20"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"/>
+
+            <StackPanel
+                x:Name="Buttons"
             
-        </StackPanel>
+			    Orientation="Horizontal"
+			    HorizontalAlignment="Right"
+			    VerticalAlignment="Top">
+
+                <Button
+                    Style="{StaticResource MenuButtonStyle}"
+                    Click="MinimizeWindow"/>
+                <Button
+                    Style="{StaticResource MenuButtonStyle}"
+                    Click="CloseWindow"/>
+
+            </StackPanel>
+        </Grid>
 
         <StackPanel
             x:Name="TaskListPanel"

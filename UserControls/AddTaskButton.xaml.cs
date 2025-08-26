@@ -42,9 +42,9 @@ namespace ToDoList.UserControls
 
             if (parent is null) throw new Exception("Parent is null");
 
-            TaskList taskList = parent as TaskList;
-            var stack = taskList.Parent as StackPanel;
-            stack.Children.Remove(taskList);
+            TaskList? taskList = parent as TaskList;
+            if (taskList?.Parent is StackPanel stack) { stack.Children.Remove(taskList); }
+            else { throw new Exception("TaskList's parent is not a StackPanel or TaskList is null."); }
         }
     }
 }
