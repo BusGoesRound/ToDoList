@@ -12,11 +12,19 @@
 
   <ItemGroup>
     <None Remove="Sprites\Cross.png" />
+    <None Remove="Sprites\Minus.png" />
+    <None Remove="Sprites\Plus.png" />
     <None Remove="Tasks.json" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Sprites\Cross.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Sprites\Minus.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Sprites\Plus.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Content Include="Tasks.json">

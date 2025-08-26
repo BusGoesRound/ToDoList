@@ -90,7 +90,7 @@ namespace ToDoList
             foreach (List<string> taskList in tasks)
             {
                 TaskList newList = new(taskList);
-                TaskListPanel.Children.Insert(TaskListPanel.Children.Count - 1, newList);
+                TaskListPanel.Children.Add(newList);
             }
         }
 
@@ -125,6 +125,11 @@ namespace ToDoList
                 Height = newHeight;
                 Top = newTop;
             }
+        }
+
+        private void AddList(object sender, RoutedEventArgs e)
+        {
+            TaskListPanel.Children.Add(new TaskList());
         }
     }
 }

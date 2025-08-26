@@ -5,6 +5,7 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:ToDoList"
         xmlns:UserControls="clr-namespace:ToDoList.UserControls"
+        xmlns:Resource="clr-namespace:ToDoList.ResourceDictionaries"
 		mc:Ignorable="d"
 		
 		Background="{StaticResource BackgroundColor}"
@@ -16,11 +17,26 @@
         Height="400" Width="400"
         MinWidth="200" MinHeight="200">
 
-    <StackPanel>
+    <Grid>
 
-        <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
 
             <Thumb
+                Grid.Column="0"
+                
                 DragDelta="ScreenResize"
                 DragStarted="ResizeThumb_DragStarted"
                 Cursor="SizeNWSE"
@@ -29,29 +45,32 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"/>
 
-            <StackPanel
-                x:Name="Buttons"
-            
-			    Orientation="Horizontal"
-			    HorizontalAlignment="Right"
-			    VerticalAlignment="Top">
-
-                <Button
-                    Style="{StaticResource MenuButtonStyle}"
-                    Click="MinimizeWindow"/>
-                <Button
-                    Style="{StaticResource MenuButtonStyle}"
-                    Click="CloseWindow"/>
-
-            </StackPanel>
+            <Button
+                Grid.Column="1"
+                
+                Style="{StaticResource MenuButtonStyle}"
+                Click="AddList"
+                Resource:MenuButtonHelper.ImageSource="/Sprites/Plus.png"/>
+            <Button
+                Grid.Column="3"
+                
+                Style="{StaticResource MenuButtonStyle}"
+                Click="MinimizeWindow"
+                Resource:MenuButtonHelper.ImageSource="/Sprites/Minus.png"/>
+            <Button
+                Grid.Column="4"
+                
+                Style="{StaticResource MenuButtonStyle}"
+                Click="CloseWindow"
+                Resource:MenuButtonHelper.ImageSource="/Sprites/Cross.png"/>
         </Grid>
 
         <StackPanel
             x:Name="TaskListPanel"
+            Grid.Row="1"
             
             Orientation="Horizontal">
-            <UserControls:AddListButton/>
         </StackPanel>
         
-    </StackPanel>
+    </Grid>
 </Window>
