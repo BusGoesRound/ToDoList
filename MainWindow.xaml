@@ -4,72 +4,80 @@
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:ToDoList"
-        xmlns:UserControls="clr-namespace:ToDoList.UserControls"
-        xmlns:Resource="clr-namespace:ToDoList.ResourceDictionaries"
+		xmlns:UserControls="clr-namespace:ToDoList.UserControls"
+		xmlns:Resource="clr-namespace:ToDoList.ResourceDictionaries"
 		mc:Ignorable="d"
 		
 		Background="{StaticResource BackgroundColor}"
 		DataContext="{Binding RelativeSource={RelativeSource Self}}"
 		ResizeMode="NoResize"
 		WindowStyle="None"
-		Topmost="True"
 		Top="633" Left="1520"
-        Height="400" Width="400"
-        MinWidth="200" MinHeight="200">
+		Height="400" Width="400"
+		MinWidth="200" MinHeight="200">
 
-    <Grid>
+	<Grid>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
+		<Grid Grid.Row="0">
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="30"/>
-            </Grid.ColumnDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="30"/>
+				<ColumnDefinition Width="30"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="30"/>
+				<ColumnDefinition Width="30"/>
+			</Grid.ColumnDefinitions>
 
             <Thumb
-                Grid.Column="0"
-                
-                DragDelta="ScreenResize"
-                Cursor="SizeNWSE"
-                
-                Height="20" Width="20"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"/>
+				Grid.Column="0"
+				
+				DragDelta="ScreenResize"
+				Cursor="SizeNWSE"
+				
+				Height="25" Width="25"
+				HorizontalAlignment="Left"
+				VerticalAlignment="Top">
+                <Thumb.Template>
+                    <ControlTemplate TargetType="Thumb">
+                        <Image Source="/Sprites/Resize Grip.png"
+						Width="20" Height="20"
+						VerticalAlignment="Top"
+						HorizontalAlignment="Left"/>
+                    </ControlTemplate>
+                </Thumb.Template>
+            </Thumb>
 
             <Button
-                Grid.Column="1"
-                
-                Style="{StaticResource MenuButtonStyle}"
-                Click="AddList"
-                Resource:MenuButtonHelper.ImageSource="/Sprites/Plus.png"/>
-            <Button
-                Grid.Column="3"
-                
-                Style="{StaticResource MenuButtonStyle}"
-                Click="MinimizeWindow"
-                Resource:MenuButtonHelper.ImageSource="/Sprites/Minus.png"/>
-            <Button
-                Grid.Column="4"
-                
-                Style="{StaticResource MenuButtonStyle}"
-                Click="CloseWindow"
-                Resource:MenuButtonHelper.ImageSource="/Sprites/Cross.png"/>
-        </Grid>
+				Grid.Column="1"
+				
+				Style="{StaticResource MenuButtonStyle}"
+				Click="AddList"
+				Resource:MenuButtonHelper.ImageSource="/Sprites/Plus.png"/>
+			<Button
+				Grid.Column="3"
+				
+				Style="{StaticResource MenuButtonStyle}"
+				Click="MinimizeWindow"
+				Resource:MenuButtonHelper.ImageSource="/Sprites/Minus.png"/>
+			<Button
+				Grid.Column="4"
+				
+				Style="{StaticResource MenuButtonStyle}"
+				Click="CloseWindow"
+				Resource:MenuButtonHelper.ImageSource="/Sprites/Cross.png"/>
+		</Grid>
 
-        <StackPanel
-            x:Name="TaskListPanel"
-            Grid.Row="1"
-            
-            Orientation="Horizontal">
-        </StackPanel>
-        
-    </Grid>
+		<StackPanel
+			x:Name="TaskListPanel"
+			Grid.Row="1"
+			
+			Orientation="Horizontal">
+		</StackPanel>
+		
+	</Grid>
 </Window>

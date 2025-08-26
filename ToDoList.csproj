@@ -12,8 +12,10 @@
 
   <ItemGroup>
     <None Remove="Sprites\Cross.png" />
+    <None Remove="Sprites\Garbage Can.png" />
     <None Remove="Sprites\Minus.png" />
     <None Remove="Sprites\Plus.png" />
+    <None Remove="Sprites\Resize Grip.png" />
     <None Remove="Tasks.json" />
   </ItemGroup>
 
@@ -21,10 +23,16 @@
     <Resource Include="Sprites\Cross.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Sprites\Garbage Can.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Sprites\Minus.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Sprites\Plus.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Sprites\Resize Grip.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Content Include="Tasks.json">
