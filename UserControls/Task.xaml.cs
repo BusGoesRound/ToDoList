@@ -103,9 +103,12 @@ namespace ToDoList.UserControls
 
 		// Dependency Properties ______________________________________________________________________________________________________________
 
-		private static readonly DependencyProperty DotColorProperty = DependencyProperty.Register("DotColor", typeof(Brush), typeof(Task));
-		private static readonly DependencyProperty DotColor2Property = DependencyProperty.Register("DotColor2", typeof(Brush), typeof(Task));
-		private static readonly DependencyProperty TaskTextProperty = DependencyProperty.Register("TaskText", typeof(string), typeof(Task));
+		private static readonly DependencyProperty DotColorProperty
+			= DependencyProperty.Register("DotColor", typeof(Brush), typeof(Task));
+		private static readonly DependencyProperty DotColor2Property
+			= DependencyProperty.Register("DotColor2", typeof(Brush), typeof(Task));
+		private static readonly DependencyProperty TaskTextProperty
+			= DependencyProperty.Register("TaskText", typeof(string), typeof(Task));
 
 		public Brush DotColor
 		{
@@ -125,9 +128,9 @@ namespace ToDoList.UserControls
 			set { SetValue(TaskTextProperty, value); }
 		}
 
-		private void MoveTask(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
-		{
-			
-		}
+		//private void MoveTask(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
+		//{
+		//	return;
+		//}
 	}
 }

@@ -9,13 +9,12 @@
         Orientation="Horizontal">
 
         <Button
-			Margin="2.5, 5"
+			Margin="0,5,5,5"
 			Click="DeleteClicked">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Grid>
-                        <Rectangle
-                            Fill="{StaticResource ForegroundColor}"
+                        <Image Source="/Sprites/Garbage Can.png"
                             Width="20" Height="20"/>
                     </Grid>
                 </ControlTemplate>
@@ -23,7 +22,7 @@
         </Button>
 
         <Button
-            Margin="2.5, 5"
+            Margin="0,5,5,5"
             HorizontalAlignment="Left"
 		    Background="{StaticResource ForegroundColor}"
 		    Click="AddTask">

@@ -12,6 +12,7 @@
 		DataContext="{Binding RelativeSource={RelativeSource Self}}"
 		ResizeMode="NoResize"
 		WindowStyle="None"
+		Topmost="False"
 		Top="633" Left="1520"
 		Height="400" Width="400"
 		MinWidth="200" MinHeight="200">
@@ -51,6 +52,8 @@
                     </ControlTemplate>
                 </Thumb.Template>
             </Thumb>
+
+            <!--Label Grid.Column="2" Content="Test" x:Name="label" Foreground="White"/-->
 
             <Button
 				Grid.Column="1"
