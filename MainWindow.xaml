@@ -75,12 +75,12 @@
 				Resource:MenuButtonHelper.ImageSource="/Sprites/Cross.png"/>
 		</Grid>
 
-		<StackPanel
+        <StackPanel
 			x:Name="TaskListPanel"
 			Grid.Row="1"
 			
 			Orientation="Horizontal">
-		</StackPanel>
+        </StackPanel>
 		
 	</Grid>
 </Window>

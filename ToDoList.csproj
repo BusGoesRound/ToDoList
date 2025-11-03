@@ -14,6 +14,7 @@
     <None Remove="Sprites\Cross.png" />
     <None Remove="Sprites\Garbage Can.png" />
     <None Remove="Sprites\Grab Dots.png" />
+    <None Remove="Sprites\Menu Dots.png" />
     <None Remove="Sprites\Minus.png" />
     <None Remove="Sprites\Plus.png" />
     <None Remove="Sprites\Resize Grip.png" />
@@ -28,6 +29,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Sprites\Grab Dots.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Sprites\Menu Dots.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Sprites\Minus.png">

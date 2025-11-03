@@ -39,25 +39,29 @@
         </Button>
 
         <Button
+            x:Name="MenuButton"
+
             Margin="0,0,5,0"
 			Grid.Column="2"
-			Click="RepeatCheckbox">
+			Click="MenuClicked">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Grid>
-                        <Ellipse
-							Stroke="{StaticResource ForegroundColor}"
-							StrokeThickness="3"
-							Fill="Transparent"
-							Width="20" Height="20"/>
-                        <Ellipse
-							Grid.Column="0"
-							Fill="{Binding Path=DotColor2}"
-							Width="10" Height="10"/>
+                        <Image Source="/Sprites/Menu Dots.png"
+                        Height="20"
+                        Width="10"/>
                     </Grid>
                 </ControlTemplate>
             </Button.Template>
         </Button>
+
+        <Popup x:Name="OverlayMenu"
+               PlacementTarget="{Binding ElementName=MenuButton}"
+               Placement="Bottom"
+               StaysOpen="false"
+               Opened="OverlayMenu_Opened">
+            <local:TaskMenu x:Name="DotsMenu"/>
+        </Popup>
 
         <Button
             Margin="0,0,5,0"

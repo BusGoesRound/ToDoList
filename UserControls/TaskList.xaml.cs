@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace ToDoList.UserControls
 {
-    /// <summary>
-    /// Interaction logic for TaskList.xaml
-    /// </summary>
     public partial class TaskList : UserControl
     {
         public TaskList()

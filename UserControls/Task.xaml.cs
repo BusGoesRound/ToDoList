@@ -12,17 +12,18 @@ namespace ToDoList.UserControls
 		private readonly Brush BackgroundColor = (SolidColorBrush)Application.Current.Resources["ForegroundColor"];
 
 		public bool IsChecked = false;
-		public bool RepeatDaily = false;
+		public bool RepeatDaily = true;
+        private readonly bool[] days = new bool[7];
 
-		// Constructors ______________________________________________________________________________________________________________
+        // Constructors ______________________________________________________________________________________________________________
 
-		public Task()
+        public Task()
 		{
 			InitializeComponent();
 			DataContext = this;
 
 			TaskText = "Task";
-		}
+        }
 
 		public Task(string task)
 		{
@@ -31,27 +32,38 @@ namespace ToDoList.UserControls
 
 			string[] taskString = task.Split('|');
 
-			IsChecked = bool.Parse(taskString[1]);
-			if(taskString.Length == 3){ RepeatDaily = bool.Parse(taskString[2]); UpdateRepeatDaily(); }
-			UpdateCheckBox();
 			TaskText = taskString[0];
-		}
+
+            IsChecked = bool.Parse(taskString[1]);
+			UpdateCheckBox();
+
+			RepeatDaily = bool.Parse(taskString[2]);
+
+            string[] daysString = taskString[3].Split(',');
+			for (int i = 0; i < daysString.Length; i++)
+			{
+				days[i] = bool.Parse(daysString[i]);
+			}
+        }
 
 		public Task(string taskText, bool isChecked)
 		{
 			InitializeComponent();
 			DataContext = this;
 
-			IsChecked = isChecked;
+            TaskText = taskText;
+
+            IsChecked = isChecked;
 			UpdateCheckBox();
-			TaskText = taskText;
 		}
 
 		// ToString ______________________________________________________________________________________________________________
 
 		override public string ToString()
 		{
-			return TaskText + "|" + IsChecked + "|" + RepeatDaily;
+			string text = TaskText + "|" + IsChecked + "|" + RepeatDaily + "|";
+			text += string.Join(",", days);
+			return text;
 		}
 
 		//Checkbox ______________________________________________________________________________________________________________
@@ -68,23 +80,14 @@ namespace ToDoList.UserControls
 			else DotColor = Brushes.Transparent;
 		}
 
-		//Repeat ______________________________________________________________________________________________________________
-
-		private void RepeatCheckbox(object sender, RoutedEventArgs e)
-		{
-			RepeatDaily = !RepeatDaily;
-			UpdateRepeatDaily();
-		}
-
-		private void UpdateRepeatDaily()
-		{
-			if (RepeatDaily) DotColor2 = BackgroundColor;
-			else DotColor2 = Brushes.Transparent;
-		}
-
 		public void ResetTask()
 		{
 			if (RepeatDaily)
+			{
+   				IsChecked = false;
+				UpdateCheckBox();
+            }
+			else if (days[(int)DateTime.Now.DayOfWeek])
 			{
 				IsChecked = false;
 				UpdateCheckBox();
@@ -105,8 +108,6 @@ namespace ToDoList.UserControls
 
 		private static readonly DependencyProperty DotColorProperty
 			= DependencyProperty.Register("DotColor", typeof(Brush), typeof(Task));
-		private static readonly DependencyProperty DotColor2Property
-			= DependencyProperty.Register("DotColor2", typeof(Brush), typeof(Task));
 		private static readonly DependencyProperty TaskTextProperty
 			= DependencyProperty.Register("TaskText", typeof(string), typeof(Task));
 
@@ -116,21 +117,35 @@ namespace ToDoList.UserControls
 			set { SetValue(DotColorProperty, value); }
 		}
 
-		public Brush DotColor2
-		{
-			get { return (Brush)GetValue(DotColor2Property); }
-			set { SetValue(DotColor2Property, value); }
-		}
-
 		public string TaskText
 		{
 			get { return (string)GetValue(TaskTextProperty); }
 			set { SetValue(TaskTextProperty, value); }
 		}
 
-		//private void MoveTask(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
-		//{
-		//	return;
-		//}
-	}
+        private void MenuClicked(object sender, RoutedEventArgs e)
+        {
+			OverlayMenu.IsOpen = !OverlayMenu.IsOpen;
+        }
+
+		public void SetDays(bool[] days)
+		{
+			days.CopyTo(this.days, 0);
+        }
+
+        private void OverlayMenu_Opened(object sender, EventArgs e)
+        {
+			DotsMenu.SetTask(this);
+        }
+
+		public bool[] GetDays()
+        {
+			return days;
+        }
+
+        //private void MoveTask(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
+        //{
+        //	return;
+        //}
+    }
 }
