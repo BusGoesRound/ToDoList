@@ -71,7 +71,8 @@
             <Button
                 Content="Enter"
                 HorizontalAlignment="Right"
-                Click="Button_Click"/>
+                Click="Button_Click"
+                Style="{StaticResource ButtonStyle}"/>
         </StackPanel>
     </Border>
 </UserControl>

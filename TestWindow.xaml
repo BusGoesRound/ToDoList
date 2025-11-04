@@ -7,12 +7,14 @@
         xmlns:local="clr-namespace:ToDoList"
         xmlns:UserControl="clr-namespace:ToDoList.UserControls"
         mc:Ignorable="d"
-        Title="TestWindow" Height="450" Width="800">
+        Title="TestWindow" Height="450" Width="800"
+        Background="{StaticResource BackgroundColor}">
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <RadioButton GroupName="MenuGroup" Content="Home"/>
+            <RadioButton GroupName="MenuGroup" Content="Home" Style="{StaticResource Radio}" Checked="RadioButton_Checked"/>
             <RadioButton GroupName="MenuGroup" Content="Settings"/>
             <RadioButton GroupName="MenuGroup" Content="Profile"/>
         </StackPanel>
     </Grid>
 </Window>
+    

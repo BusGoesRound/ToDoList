@@ -136,13 +136,23 @@ namespace ToDoList
 				Width = newWidth;
 				Left = newLeft;
 			}
+			else
+			{
+				Width = MinWidth;
+				Left = CORNER_Y - MinWidth;
+            }
 
 			if (newHeight > MinHeight)
 			{
 				Height = newHeight;
 				Top = newTop;
 			}
-		}
+			else
+			{
+				Height = MinHeight;
+				Top = CORNER_X - MinHeight;
+            }
+        }
 
 		private void AddList(object sender, RoutedEventArgs e) => TaskListPanel.Children.Add(new TaskList());
 	}

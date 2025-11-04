@@ -13,16 +13,18 @@
         BorderThickness="2"
         VerticalAlignment="Center"
         HorizontalAlignment="Center"
-        Padding="5">
+        Padding="5,3">
         <StackPanel>
             <RadioButton x:Name="RepeatDaily"
                 GroupName="Repeat"
                 Content="Repeat Daily"
-                Click="SetDaily"/>
+                Click="SetDaily"
+                Style="{StaticResource Radio}"/>
             <RadioButton x:Name="RepeatSpecific"
                 GroupName="Repeat"
                 Content="Repeat Specific"
-                Click="OpenDaysWindow"/>
+                Click="OpenDaysWindow"
+                Style="{StaticResource Radio}"/>
 
             <Popup x:Name="DOTWPOP"
                 Opened="DOTWPOP_Opened">
